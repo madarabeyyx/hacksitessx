@@ -2,17 +2,53 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sahte Hacker Konsolu</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="terminal">
-    <div id="output"></div>
-    <div id="input-area">
-      <input type="text" id="command-input" placeholder="Komut girin..." autocomplete="off" />
-      <button id="send-btn">Gönder</button>
+  <div class="container">
+
+    <div id="terminal-container">
+      <div id="terminal-output" class="terminal-output"></div>
+      <div id="input-container">
+        <input type="text" id="terminal-input" placeholder="Komut girin..." autocomplete="off" />
+        <button id="send-btn">Gönder</button>
+      </div>
     </div>
+
+    <div id="command-list">
+      <h3>Komutlar</h3>
+      <ul>
+        <li>hack</li>
+        <li>scan</li>
+        <li>help</li>
+        <li>status</li>
+        <li>decrypt</li>
+        <li>upload</li>
+        <li>download</li>
+        <li>connect</li>
+        <li>disconnect</li>
+        <li>firewall</li>
+        <li>trace</li>
+        <li>clean</li>
+        <li>config</li>
+        <li>encrypt</li>
+        <li>restart</li>
+        <li>shutdown</li>
+        <li>logs</li>
+        <li>ping</li>
+        <li>proxy</li>
+        <li>update</li>
+        <li>backup</li>
+        <li>restore</li>
+        <li>kill</li>
+        <li>deploy</li>
+        <li>monitor</li>
+        <li>clear</li>
+      </ul>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
