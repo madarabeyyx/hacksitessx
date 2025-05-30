@@ -1,5 +1,5 @@
-const terminal = document.getElementById('terminal');
-const input = document.getElementById('input');
+const terminal = document.getElementById("terminal");
+const input = document.getElementById("command-input");
 
 const commands = {
   hack: [
@@ -167,56 +167,37 @@ const commands = {
   ]
 };
 
-// Satır satır yazdırma fonksiyonu
-function typeLines(lines, index = 0, callback) {
-  if (index >= lines.length) {
-    callback();
-    return;
-  }
-  const line = document.createElement('div');
-  line.textContent = lines[index];
+// Sayfa açıldığında otomatik mesaj göster
+appendToTerminal("Komutlar için 'help' yaz...");
+
+function appendToTerminal(text) {
+  const line = document.createElement("div");
+  line.textContent = text;
   terminal.appendChild(line);
   terminal.scrollTop = terminal.scrollHeight;
-
-  // 200ms gecikme ile sonraki satırı yaz
-  setTimeout(() => {
-    typeLines(lines, index + 1, callback);
-  }, 200);
 }
 
-// Komut işle
-function handleCommand(command) {
-  command = command.trim().toLowerCase();
-  input.disabled = true;
-
-  if (command === '') {
-    input.disabled = false;
+function runCommand(command) {
+  if (command === "clear") {
+    terminal.innerHTML = "";
     return;
   }
 
-  if (command === 'clear') {
-    terminal.innerHTML = '';
-    input.disabled = false;
-    return;
-  }
-
-  if (commands[command]) {
-    typeLines(commands[command], 0, () => {
-      input.disabled = false;
-      input.focus();
+  const output = commands[command];
+  if (output) {
+    output.forEach((line, index) => {
+      setTimeout(() => appendToTerminal(line), index * 300);
     });
   } else {
-    typeLines(["Bilinmeyen komut: " + command], 0, () => {
-      input.disabled = false;
-      input.focus();
-    });
+    appendToTerminal(`'${command}' geçersiz bir komut. help yaz.`);
   }
 }
 
-// Enter tuşuna basılınca komutu çalıştır
-input.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    handleCommand(input.value);
-    input.value = '';
+input.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    const command = input.value.trim();
+    appendToTerminal("> " + command);
+    runCommand(command);
+    input.value = "";
   }
 });
