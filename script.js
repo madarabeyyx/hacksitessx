@@ -1,5 +1,11 @@
-const terminal = document.getElementById("terminal");
+const output = document.getElementById("output");
 const input = document.getElementById("command-input");
+const sendBtn = document.getElementById("send-btn");
+
+// İlk açılış mesajı
+appendToTerminal("Komutlar için 'help' yaz...");
+
+input.focus();
 
 const commands = {
   hack: [
@@ -167,37 +173,47 @@ const commands = {
   ]
 };
 
-// Sayfa açıldığında otomatik mesaj göster
-appendToTerminal("Komutlar için 'help' yaz...");
-
-function appendToTerminal(text) {
-  const line = document.createElement("div");
-  line.textContent = text;
-  terminal.appendChild(line);
-  terminal.scrollTop = terminal.scrollHeight;
-}
-
-function runCommand(command) {
-  if (command === "clear") {
-    terminal.innerHTML = "";
-    return;
-  }
-
-  const output = commands[command];
-  if (output) {
-    output.forEach((line, index) => {
-      setTimeout(() => appendToTerminal(line), index * 300);
-    });
-  } else {
-    appendToTerminal(`'${command}' geçersiz bir komut. help yaz.`);
-  }
-}
-
-input.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
     const command = input.value.trim();
+    if (command !== "") {
+      appendToTerminal("> " + command);
+      runCommand(command);
+      input.value = "";
+    }
+  }
+});
+
+sendBtn.addEventListener("click", () => {
+  const command = input.value.trim();
+  if (command !== "") {
     appendToTerminal("> " + command);
     runCommand(command);
     input.value = "";
   }
 });
+
+function appendToTerminal(text) {
+  const line = document.createElement("div");
+  line.textContent = text;
+  output.appendChild(line);
+  output.scrollTop = output.scrollHeight;
+}
+
+function runCommand(cmd) {
+  if (cmd === "clear") {
+    output.innerHTML = "";
+    return;
+  }
+
+  if (commands[cmd]) {
+    let i = 0;
+    const interval = setInterval(() => {
+      appendToTerminal(commands[cmd][i]);
+      i++;
+      if (i >= commands[cmd].length) clearInterval(interval);
+    }, 500);
+  } else {
+    appendToTerminal("Bilinmeyen komut: " + cmd);
+  }
+}
