@@ -1,12 +1,3 @@
-const output = document.getElementById("output");
-const input = document.getElementById("command-input");
-const sendBtn = document.getElementById("send-btn");
-
-// İlk açılış mesajı
-appendToTerminal("Komutlar için 'help' yaz...");
-
-input.focus();
-
 const commands = {
   hack: [
     "Bağlantı kuruluyor...",
@@ -50,7 +41,8 @@ const commands = {
     "kill     - İşlem sonlandır",
     "deploy   - Yazılım dağıt",
     "monitor  - Sistem izleme",
-    "clear    - Ekranı temizle"
+    "clear    - Ekranı temizle",
+    "hackmetin - Efektli terminal yazısı"
   ],
   status: [
     "CPU Kullanımı: %27",
@@ -170,50 +162,58 @@ const commands = {
   ],
   clear: [
     "Ekran temizleniyor..."
+  ],
+  hackmetin: [
+    "Bağlantı kuruluyor...",
+    "Hedef sistem: 45.130.11.77",
+    "Bağlantı başarılı!",
+    "root@terminal:~$ sudo access_grant --override",
+    "Yetki alındı. Root erişimi aktif.",
+    "Portlar taranıyor...",
+    "Port 21 - açık",
+    "Port 22 - açık",
+    "Port 80 - açık",
+    "Port 443 - açık",
+    "Firewall atlandı...",
+    "RSA-2048 şifresi çözülüyor...",
+    "Kırılıyor ▓▓▓░░░░░░░░░ 27%",
+    "Kırılıyor ▓▓▓▓▓▓▓░░░░░ 61%",
+    "Kırılıyor ▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%",
+    "Kimlik doğrulama bypass edildi.",
+    "Veritabanına erişiliyor...",
+    "Kullanıcılar tablosu bulundu:",
+    "[admin] [admin123]",
+    "[mod] [hunter2]",
+    "[guest] [guest]",
+    "Dosya sistemi taranıyor...",
+    "/etc/passwd",
+    "/var/log/auth.log",
+    "/home/admin/secret.txt",
+    "Dosyalar indiriliyor...",
+    "Transfer ▓▓░░░░░░░░░░ 17%",
+    "Transfer ▓▓▓▓▓░░░░░░░ 48%",
+    "Transfer ▓▓▓▓▓▓▓▓▓▓▓▓ 100%",
+    "Veri sızıntısı başarılı.",
+    "╔════════════════════════════╗",
+    "║     HACK TAMAMLANDI        ║",
+    "╚════════════════════════════╝",
+    "root@victim:~$ shutdown -h now",
+    "Sistem kapatılıyor...",
+    "──────────────",
+    "[✓] İzler temizlendi",
+    "[✓] Proxy aktif",
+    "[✓] VPN bağlantısı sağlam",
+    "Çıkış yapılıyor...",
+    "Terminal kapatıldı.",
+    " ",
+    "██████╗░░█████╗░░█████╗░██╗░░██╗███████╗",
+    "██╔══██╗██╔══██╗██╔══██╗██║░██╔╝██╔════╝",
+    "██████╦╝███████║██║░░╚═╝█████═╝░█████╗░░",
+    "██╔══██╗██╔══██║██║░░██╗██╔═██╗░██╔══╝░░",
+    "██████╦╝██║░░██║╚█████╔╝██║░╚██╗███████╗",
+    "╚═════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝╚══════╝",
+    " ",
+    "Hedef sistem başarıyla ele geçirildi.",
+    "root@mainframe:~$ _"
   ]
-};
-
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const command = input.value.trim();
-    if (command !== "") {
-      appendToTerminal("> " + command);
-      runCommand(command);
-      input.value = "";
-    }
-  }
-});
-
-sendBtn.addEventListener("click", () => {
-  const command = input.value.trim();
-  if (command !== "") {
-    appendToTerminal("> " + command);
-    runCommand(command);
-    input.value = "";
-  }
-});
-
-function appendToTerminal(text) {
-  const line = document.createElement("div");
-  line.textContent = text;
-  output.appendChild(line);
-  output.scrollTop = output.scrollHeight;
-}
-
-function runCommand(cmd) {
-  if (cmd === "clear") {
-    output.innerHTML = "";
-    return;
-  }
-
-  if (commands[cmd]) {
-    let i = 0;
-    const interval = setInterval(() => {
-      appendToTerminal(commands[cmd][i]);
-      i++;
-      if (i >= commands[cmd].length) clearInterval(interval);
-    }, 500);
-  } else {
-    appendToTerminal("Bilinmeyen komut: " + cmd);
-  }
-}
+};j
