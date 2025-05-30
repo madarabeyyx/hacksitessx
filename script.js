@@ -1,3 +1,7 @@
+const terminalOutput = document.getElementById("terminal-output");
+const commandInput = document.getElementById("command-input");
+const submitButton = document.getElementById("submit-button");
+
 const commands = {
   hack: [
     "Bağlantı kuruluyor...",
@@ -51,118 +55,33 @@ const commands = {
     "Ağ Bağlantısı: Aktif",
     "Güvenlik Durumu: Normal"
   ],
-  decrypt: [
-    "Şifre çözme başlatıldı...",
-    "Anahtar bulunuyor...",
-    "Veri analiz ediliyor...",
-    "Şifre çözüldü: 'topsecret123'"
-  ],
-  upload: [
-    "Dosya seçildi...",
-    "Yükleme başlatıldı...",
-    "Yükleme %100 tamamlandı.",
-    "Dosya başarıyla yüklendi."
-  ],
-  download: [
-    "İndirilecek dosya seçildi...",
-    "İndirme başlatıldı...",
-    "İndirme %100 tamamlandı.",
-    "Dosya indirildi."
-  ],
-  connect: [
-    "Sunucuya bağlanılıyor...",
-    "Bağlantı başarılı.",
-    "Veri alışverişi başlatıldı."
-  ],
-  disconnect: [
-    "Bağlantı kesiliyor...",
-    "Bağlantı sonlandırıldı."
-  ],
-  firewall: [
-    "Güvenlik duvarı durumu: Aktif",
-    "Gelen bağlantılar denetleniyor.",
-    "Güvenlik duvarı kuralı eklendi: 192.168.0.0/24 engellendi."
-  ],
-  trace: [
-    "İz sürme başlatıldı...",
-    "Hedef IP: 10.0.0.5",
-    "Ağ geçitleri kontrol ediliyor...",
-    "İz sürme tamamlandı."
-  ],
-  clean: [
-    "Geçmiş temizleniyor...",
-    "Önbellek boşaltıldı.",
-    "Geçmiş tamamen temizlendi."
-  ],
-  config: [
-    "Sistem yapılandırması yükleniyor...",
-    "Parametreler güncelleniyor...",
-    "Yapılandırma tamamlandı."
-  ],
-  encrypt: [
-    "Şifreleme başlatıldı...",
-    "Anahtar oluşturuluyor...",
-    "Veri şifrelendi."
-  ],
-  restart: [
-    "Sistem yeniden başlatılıyor...",
-    "Tüm servisler durduruldu.",
-    "Sistem tekrar başlatıldı."
-  ],
-  shutdown: [
-    "Sistem kapanıyor...",
-    "Tüm işlemler durduruldu.",
-    "Güç kapatıldı."
-  ],
+  decrypt: ["Şifre çözme başlatıldı...", "Anahtar bulunuyor...", "Veri analiz ediliyor...", "Şifre çözüldü: 'topsecret123'"],
+  upload: ["Dosya seçildi...", "Yükleme başlatıldı...", "Yükleme %100 tamamlandı.", "Dosya başarıyla yüklendi."],
+  download: ["İndirilecek dosya seçildi...", "İndirme başlatıldı...", "İndirme %100 tamamlandı.", "Dosya indirildi."],
+  connect: ["Sunucuya bağlanılıyor...", "Bağlantı başarılı.", "Veri alışverişi başlatıldı."],
+  disconnect: ["Bağlantı kesiliyor...", "Bağlantı sonlandırıldı."],
+  firewall: ["Güvenlik duvarı durumu: Aktif", "Gelen bağlantılar denetleniyor.", "Güvenlik duvarı kuralı eklendi: 192.168.0.0/24 engellendi."],
+  trace: ["İz sürme başlatıldı...", "Hedef IP: 10.0.0.5", "Ağ geçitleri kontrol ediliyor...", "İz sürme tamamlandı."],
+  clean: ["Geçmiş temizleniyor...", "Önbellek boşaltıldı.", "Geçmiş tamamen temizlendi."],
+  config: ["Sistem yapılandırması yükleniyor...", "Parametreler güncelleniyor...", "Yapılandırma tamamlandı."],
+  encrypt: ["Şifreleme başlatıldı...", "Anahtar oluşturuluyor...", "Veri şifrelendi."],
+  restart: ["Sistem yeniden başlatılıyor...", "Tüm servisler durduruldu.", "Sistem tekrar başlatıldı."],
+  shutdown: ["Sistem kapanıyor...", "Tüm işlemler durduruldu.", "Güç kapatıldı."],
   logs: [
     "Günlük kayıtları yükleniyor...",
     "[2025-05-30 12:00] Bağlantı başarılı.",
     "[2025-05-30 12:05] Şifre kırma işlemi tamamlandı.",
     "[2025-05-30 12:10] Dosya indirildi."
   ],
-  ping: [
-    "Hedefe ping atılıyor: 8.8.8.8",
-    "Gecikme süresi: 23ms",
-    "Ping başarılı."
-  ],
-  proxy: [
-    "Proxy durumu: Aktif",
-    "Trafik şifreleniyor.",
-    "Proxy ayarları güncellendi."
-  ],
-  update: [
-    "Yazılım güncellemeleri kontrol ediliyor...",
-    "Yeni güncelleme bulundu: v2.1",
-    "Güncelleme indiriliyor...",
-    "Güncelleme tamamlandı."
-  ],
-  backup: [
-    "Yedekleme başlatıldı...",
-    "Veriler sıkıştırılıyor...",
-    "Yedekleme tamamlandı."
-  ],
-  restore: [
-    "Yedekten geri yükleme başlatıldı...",
-    "Veriler kurtarılıyor...",
-    "Geri yükleme tamamlandı."
-  ],
-  kill: [
-    "İşlem ID 4532 sonlandırılıyor...",
-    "İşlem durduruldu."
-  ],
-  deploy: [
-    "Yazılım dağıtımı başlatıldı...",
-    "Dosyalar sunucuya gönderiliyor...",
-    "Dağıtım tamamlandı."
-  ],
-  monitor: [
-    "Sistem izleme aktif.",
-    "CPU ve RAM performansı izleniyor.",
-    "Anormal durum tespiti yok."
-  ],
-  clear: [
-    "Ekran temizleniyor..."
-  ],
+  ping: ["Hedefe ping atılıyor: 8.8.8.8", "Gecikme süresi: 23ms", "Ping başarılı."],
+  proxy: ["Proxy durumu: Aktif", "Trafik şifreleniyor.", "Proxy ayarları güncellendi."],
+  update: ["Yazılım güncellemeleri kontrol ediliyor...", "Yeni güncelleme bulundu: v2.1", "Güncelleme indiriliyor...", "Güncelleme tamamlandı."],
+  backup: ["Yedekleme başlatıldı...", "Veriler sıkıştırılıyor...", "Yedekleme tamamlandı."],
+  restore: ["Yedekten geri yükleme başlatıldı...", "Veriler kurtarılıyor...", "Geri yükleme tamamlandı."],
+  kill: ["İşlem ID 4532 sonlandırılıyor...", "İşlem durduruldu."],
+  deploy: ["Yazılım dağıtımı başlatıldı...", "Dosyalar sunucuya gönderiliyor...", "Dağıtım tamamlandı."],
+  monitor: ["Sistem izleme aktif.", "CPU ve RAM performansı izleniyor.", "Anormal durum tespiti yok."],
+  clear: ["Ekran temizleniyor..."],
   hackmetin: [
     "Bağlantı kuruluyor...",
     "Hedef sistem: 45.130.11.77",
@@ -216,4 +135,54 @@ const commands = {
     "Hedef sistem başarıyla ele geçirildi.",
     "root@mainframe:~$ _"
   ]
-};j
+};
+
+function printLines(lines) {
+  lines.forEach((line, index) => {
+    setTimeout(() => {
+      const div = document.createElement("div");
+      div.textContent = line;
+      terminalOutput.appendChild(div);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }, index * 100);
+  });
+}
+
+function executeCommand(command) {
+  const div = document.createElement("div");
+  div.textContent = `> ${command}`;
+  terminalOutput.appendChild(div);
+
+  if (commands[command]) {
+    printLines(commands[command]);
+  } else {
+    const errorDiv = document.createElement("div");
+    errorDiv.textContent = "Geçersiz komut. Komutlar için 'help' yaz.";
+    terminalOutput.appendChild(errorDiv);
+  }
+
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+commandInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    const command = commandInput.value.trim();
+    if (command !== "") {
+      executeCommand(command);
+      commandInput.value = "";
+    }
+  }
+});
+
+submitButton.addEventListener("click", function () {
+  const command = commandInput.value.trim();
+  if (command !== "") {
+    executeCommand(command);
+    commandInput.value = "";
+  }
+});
+
+// Sayfa ilk yüklendiğinde bilgi mesajı göster
+window.onload = () => {
+  printLines(["Komutlar için 'help' yaz..."]);
+};
